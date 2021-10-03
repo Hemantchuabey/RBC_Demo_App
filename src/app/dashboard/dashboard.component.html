@@ -1,0 +1,193 @@
+<div class="container d-flex justify-content-between">
+  <h3 class="text-secondary">Welcome, {{ loggedUser }}</h3>
+  <button type="submit" class="btn btn-danger btn-sm" routerLink="/LoginPage">
+    Logout
+  </button>
+</div>
+<div class="container d-flex justify-content-between">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NAME</th>
+        <th scope="col">MOBILE</th>
+        <th scope="col">EMAIL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items$ | async">
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.mobile }}</td>
+        <td>{{ item.email }}</td>
+        <td>
+          <button
+            class="btn btn-primary btn-small"
+            (click)="openEditForm(openEditContent, item, item.id)"
+            (click)="headingDecider(item.id)"
+          >
+            EDIT
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn btn-danger btn-small"
+            (click)="deleteItems(item.id)"
+          >
+            DELETE
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container d-flex justify-content-between">
+  <button
+    class="btn btn-primary btn-small"
+    (click)="openInsertForm(openInsertContent)"
+    (click)="headingDecider(0)"
+  >
+    Add Items
+  </button>
+</div>
+
+<!-- edit -->
+<ng-template #openEditContent let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editProfileLabel">{{ header }}</h5>
+  </div>
+  <div class="modal-body">
+    <form
+      #f="ngForm"
+      [formGroup]="editProfileForm"
+      (ngSubmit)="onEdit(editProfileForm.value)"
+    >
+      <!-- editProfileForm.value -->
+      <!-- <div class="form-group row">
+        <label for="id" class="col-sm-4 col-form-label">ID</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            id="id"
+            formControlName="id"
+          />
+        </div>
+      </div>
+      <br /> -->
+      <div class="form-group row">
+        <label for="name" class="col-sm-4 col-form-label">Name</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+          />
+        </div>
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="email" class="col-sm-4 col-form-label">Email</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+        </div>
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="mobile" class="col-sm-4 col-form-label">Mobile</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            id="mobile"
+            formControlName="mobile"
+          />
+        </div>
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.dismiss()">
+          Close
+        </button>
+        <button type="submit" class="btn btn-success">Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<!-- insert -->
+
+<ng-template #openInsertContent let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="insertProfileLabel">{{ header }}</h5>
+  </div>
+  <div class="modal-body">
+    <form
+      #f="ngForm"
+      [formGroup]="insertProfileForm"
+      (ngSubmit)="onInsert(insertProfileForm.value)"
+    >
+      <!-- editProfileForm.value -->
+      <!-- <div class="form-group row">
+        <label for="id" class="col-sm-4 col-form-label">ID</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            id="id"
+            formControlName="id"
+          />
+        </div>
+      </div>
+      <br /> -->
+      <div class="form-group row">
+        <label for="name" class="col-sm-4 col-form-label">Name</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+          />
+        </div>
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="email" class="col-sm-4 col-form-label">Email</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+        </div>
+      </div>
+      <br />
+      <div class="form-group row">
+        <label for="mobile" class="col-sm-4 col-form-label">Mobile</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            id="mobile"
+            formControlName="mobile"
+          />
+        </div>
+      </div>
+      <br />
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.dismiss()">
+          Close
+        </button>
+        <button type="submit" class="btn btn-success">Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

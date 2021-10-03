@@ -1,0 +1,35 @@
+<div class="container h-100 d-flex justify-content-center align-items-center">
+  <form class="loginForm needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="username" class="form-label fs-4">Username : </label>
+      <input
+        type="username"
+        class="form-control"
+        id="username"
+        required
+        minlength="4"
+        #username
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label fs-4">Password : </label>
+      <input type="password" class="form-control" id="password" required />
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg"
+      (click)="showUsername(username.value)"
+      (click)="onClick($event)"
+      routerLink="/Dashboard"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<!-- <div>
+  <h1 class="text-primary mt-2" *ngIf="makeItVisible">
+    Welcome {{ loggedUser }}
+  </h1>
+</div> -->
